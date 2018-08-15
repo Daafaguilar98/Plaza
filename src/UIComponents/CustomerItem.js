@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {
   View,
+  TouchableOpacity,
   Text
 } from 'react-native';
 
 export default class CustomerItem extends React.Component {
+
   render() {
     return (
       <View style={Style.item}>

@@ -7,20 +7,28 @@ import LoginScreen from './Screens/Auth/Login.js'
 import AuthLoadingScreen from './Screens/Auth/Loading.js'
 
 import OrdersScreen from './Screens/Layouts/Orders.js'
+import OrderScreen from './Screens/Layouts/Orders/Order.js'
 import OrdersNewCustomerScreen from './Screens/Layouts/Orders/New/Customer.js'
 import OrdersNewProductsScreen from './Screens/Layouts/Orders/New/Products.js'
 import OrdersProduct from './UIComponents/OrdersProduct.js'
 import OrdersNewSummaryScreen from './Screens/Layouts/Orders/New/Summary.js'
+import OrdersEditCustomerScreen from './Screens/Layouts/Orders/Edit/Customer.js'
+import OrdersEditProductsScreen from './Screens/Layouts/Orders/Edit/Products.js'
+import OrdersEditProduct from './UIComponents/OrdersEditProduct.js'
 
 import SettingsScreen from './Screens/Layouts/Setting'
 
 const OrdersStack = createStackNavigator(
   {
     Main: OrdersScreen,
+    Order: OrderScreen,
     Customer: OrdersNewCustomerScreen,
     Products: OrdersNewProductsScreen,
+    Summary: OrdersNewSummaryScreen,
     Product:  OrdersProduct,
-    Summary: OrdersNewSummaryScreen
+    CustomerEdit: OrdersEditCustomerScreen,
+    ProductsEdit: OrdersEditProductsScreen,
+    ProductEdit:  OrdersEditProduct
   },
   {
     headerMode: 'none',

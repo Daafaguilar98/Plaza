@@ -15,8 +15,14 @@ export default class SettingScreen extends React.Component {
     super(props)
 
     this.state = {
-      sync: false
+      user: {}
     }
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('@userToken:key', (err, result) => {
+      this.setState({ user: JSON.parse(result) })
+    })
   }
 
   render() {
@@ -24,7 +30,7 @@ export default class SettingScreen extends React.Component {
       <View style={Style.layout}>
         <NavBar/>
         <View style={Style.body}>
-          <Text>{this.state.sync}</Text>
+          <Text>{ this.state.user.email }</Text>
           <Button
             title="Sincronizar datos"
             onPress={this.syncData}
@@ -46,9 +52,6 @@ export default class SettingScreen extends React.Component {
 
   syncData = () => {
     axios.get('http://api-proveedor.herokuapp.com/contapyme/sync').then((response) => {
-      this.setState({
-        sync: response.sync
-      })
     })
   }
 }

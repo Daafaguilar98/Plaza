@@ -23,23 +23,19 @@ export default class OrdersNewCustomerScreen extends React.Component {
       fullData: [],
       data: [],
       query: '',
-      newOrder: {}
+      currentOrder: {}
     }
   }
 
   componentDidMount() {
     this.getCostumers()
+    this.setState({ currentOrder: this.props.navigation.getParam('data', {})})
   }
 
-  _setCustomer = (item) => {
-    let newOrder = JSON.stringify({
-      customer: {
-        id_number: item.id_number,
-        type_price: item.type_price
-      }
-    })
-    AsyncStorage.mergeItem('@newOrder:key', newOrder)
-    this.props.navigation.navigate('Products')
+  _updateCustomer = (item) => {
+    let currentOrder = this.state.currentOrder
+    currentOrder.id_number = item.id_number
+    this.props.navigation.navigate('Order', currentOrder)
   }
 
   getCostumers () {
@@ -72,7 +68,7 @@ export default class OrdersNewCustomerScreen extends React.Component {
           <FlatList
             data={this.state.data}
             renderItem={({item}) => (
-              <TouchableOpacity onPress={() => {this._setCustomer(item)}}>
+              <TouchableOpacity onPress={() => {this._updateCustomer(item)}}>
                 <CustomerItem
                   {...item}
                   />

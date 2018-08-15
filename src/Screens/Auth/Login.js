@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import {
   AsyncStorage,
   Image,
@@ -9,6 +10,17 @@ import {
 } from 'react-native';
 
 export default class LoginScreen extends React.Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      phone: '',
+      password: '',
+      messageError: ''
+    }
+  }
+
   render() {
     return (
       <View style={Style.layout}>
@@ -17,13 +29,18 @@ export default class LoginScreen extends React.Component {
             style={Style.LoginLogo}
             source={{uri: 'http://plaza.netlify.com/static/img/logo.e219ed5.png'}}
           />
+        <Text>{ this.state.messageError }</Text>
         <View style={Style.inputs}>
             <TextInput
-              placeholder="Correo electrónico"
+              placeholder="Numero de celular"
+              onChangeText={(text) => this.setState({phone: text})}
+              value={this.state.phone}
               />
             <TextInput
               placeholder="Contraseña"
               secureTextEntry={true}
+              onChangeText={(text) => this.setState({password: text})}
+              value={this.state.password}
               />
           </View>
           <Button
@@ -35,9 +52,19 @@ export default class LoginScreen extends React.Component {
     );
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('Layouts');
+  _signInAsync = () => {
+    let params = {
+      phone: this.state.phone,
+      password: this.state.password,
+    }
+    axios.post(`https://api-proveedor.herokuapp.com/auth/login`, params).then((response) => {
+      if (response.data.auth) {
+        AsyncStorage.setItem('@userToken:key', JSON.stringify(response.data.data))
+        this.props.navigation.navigate('Layouts')
+      } else {
+        this.setState({ messageError: response.data.message })
+      }
+    })
   }
 }
 

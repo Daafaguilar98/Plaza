@@ -103,7 +103,7 @@ export default class OrdersProduct extends React.Component {
           </View>
           <Button
             onPress={this._setProduct}
-            title="AGREGAR"
+            title="EDITAR"
           />
         </View>
       </View>

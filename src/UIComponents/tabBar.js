@@ -12,14 +12,11 @@ class tabBar extends React.Component {
   render() {
     return (
       <View style={Style.tabBar}>
-        <TouchableOpacity onPress={() => Linking.openURL('http://stackoverflow.com/questions/35531679/react-native-open-links-in-browser')}>
+        <TouchableOpacity onPress={() => Linking.openURL('whatsapp://app')}>
           <Icon name="speech" size={25} color="#262626" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Orders')}>
           <Icon name="notebook" size={25} color="#262626" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon name="grid" size={25} color="#262626" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')}>
           <Icon name="settings" size={25} color="#262626" />

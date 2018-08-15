@@ -9,7 +9,8 @@ import {
 export default class ProductsItem extends React.Component {
 
   handleProduct = () => {
-    this.props.navigation.navigate('Product',
+    const route = this.props.route
+    this.props.navigation.navigate(route,
     {
       code: this.props.code,
       name: this.props.name,

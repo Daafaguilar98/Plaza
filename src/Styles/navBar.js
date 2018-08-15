@@ -21,5 +21,8 @@ export default StyleSheet.create({
   },
   sectionCenter: {
     alignItems: 'center'
+  },
+  right: {
+    alignItems: 'flex-end'
   }
 });

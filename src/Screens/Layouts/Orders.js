@@ -17,11 +17,15 @@ export default class OrdersScreen extends React.Component {
     super(props)
 
     this.state = {
-      data: []
+      data: [],
+      user: {}
     }
   }
 
   componentDidMount() {
+    AsyncStorage.getItem('@userToken:key', (err, result) => {
+      this.setState({ user: JSON.parse(result) })
+    })
     this.getOrders()
   }
 
@@ -33,10 +37,11 @@ export default class OrdersScreen extends React.Component {
 
   createOrder = () => {
     const newOrder = JSON.stringify({
+      seller: this.state.user.phone,
       customer: {},
       products: []
     })
-    AsyncStorage.setItem('@newOrder', newOrder)
+    AsyncStorage.setItem('@newOrder:key', newOrder)
     this.props.navigation.navigate('Customer')
   }
 
@@ -46,13 +51,14 @@ export default class OrdersScreen extends React.Component {
         <NavBar/>
         <View style={Style.body}>
           <Button
-            title="Create an order"
+            style={Style.newOrder}
+            title="Crear un pedido"
             onPress={this.createOrder}
           />
           <FlatList
             data={this.state.data}
             renderItem={({item}) => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Order', {data: item})}>
                 <OrdersItem
                   {...item}
                   />

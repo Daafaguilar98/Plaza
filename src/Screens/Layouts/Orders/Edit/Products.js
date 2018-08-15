@@ -62,7 +62,6 @@ export default class OrdersNewProductsScreen extends React.Component {
       <View style={Style.layout}>
         <NavBar
           goback={true}
-          goSummary={true}
         />
         <View style={Style.body}>
           <View style={Style.searchWrapper}>
@@ -81,7 +80,7 @@ export default class OrdersNewProductsScreen extends React.Component {
               renderItem={({item}) => (
                 <ProductsItem
                   navigation={this.props.navigation}
-                  route="Product"
+                  route="ProductEdit"
                   {...item}
                 />
               )}

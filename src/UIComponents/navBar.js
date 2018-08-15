@@ -25,7 +25,13 @@ class navBar extends React.Component {
             source={{uri: 'http://plaza.netlify.com/static/img/logo.e219ed5.png'}}
             />
         </View>
-        <View style={Style.section}/>
+        <View style={[Style.section, Style.right]}>
+          { this.props.goSummary &&
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Summary')}>
+              <Icon name="social-dropbox" size={24} color="#262626" />
+            </TouchableOpacity>
+          }
+        </View>
       </View>
     )
   }
